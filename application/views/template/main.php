@@ -61,7 +61,7 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="<?=site_url('dashboard')?>" class="brand-link" align="center">
-      <span class="brand-text font-weight-light">SiMonJar Web</span>
+      <span class="brand-text font-weight-light"><b>SiMonJar</b> Web</span>
     </a>
 
     <!-- Sidebar -->
@@ -98,8 +98,8 @@
             </li>
             <li class="nav-item">
                 <a href="<?= site_url('Registration/registdata')?>" class="nav-link ">
-                  <i class="nav-icon fas fa-wifi"></i>
-                  <p>Wireless</p>
+                  <i class="nav-icon fas fa-cog"></i>
+                  <p>Device</p>
                 </a>
             </li>
             <li class="nav-item">
@@ -179,6 +179,7 @@
 <!-- Bootstrap App -->
 <script src="<?= base_url('assets/template/') ?>dist/js/adminlte.js"></script>
 
+
 <!-- DataTables  & Plugins -->
 <script src="<?= base_url('assets/template/') ?>plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="<?= base_url('assets/template/') ?>plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
@@ -198,8 +199,8 @@
 <script>
   $(function () {
     $("#example1").DataTable({
-      "responsive": true, "lengthChange": false, "autoWidth": false,
-      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+      "responsive": true, "lengthChange": false, "autoWidth": false, "searching": true,
+      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     $('#example2').DataTable({
       "paging": true,
@@ -209,7 +210,7 @@
       "info": true,
       "autoWidth": false,
       "responsive": true,
-    });
+    });  
   });
 </script>
 

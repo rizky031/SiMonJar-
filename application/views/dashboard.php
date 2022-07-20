@@ -9,7 +9,7 @@
               <div class="card-header">
                 <h3 class="card-title">
                   <i class="far fa-chart-bar"></i>
-                  History
+                  Log Activity Today
                 </h3>
                 <div class="card-tools">
                   <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -22,23 +22,22 @@
                   <thead>
                   <tr>
                     <th>Time</th>
-                    <th>Action</th>
-                    <th>User</th>
-                    <th>Policy</th>
+                    <th>Topics</th>
+                    <th>Message</th>
                   </tr>
                   </thead>
                   <tbody>
-                    <?php foreach ($history as $data) { ?>
+                      <?php foreach ($log as $data) { ?>
                         <tr>
                           <th><?= $data['time']; ?></th>
-                          <th><?= $data['action']; ?></th>
-                          <th><?= $data['by']; ?></th>
-                          <th><?= $data['policy']; ?></th>
+                          <th><?= $data['topics']; ?></th>
+                          <th><?= $data['message']; ?></th>
                         </tr>
                     <?php } ?>
                   </tbody>
                 </table>
               <div>
+            
               <!-- /.card-body-->
             </div>
             <!-- /.card -->

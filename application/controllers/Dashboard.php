@@ -10,15 +10,17 @@ class Dashboard extends CI_Controller {
 		$registration = $API->comm("/interface/wireless/registration-table/print");
 		$resource = $API->comm("/system/resource/print");
 		$history = $API->comm("/system/history/print");
+		$log = $API->comm("/log/print");
 
 		$cpu = $resource[0]['cpu-load'];
 		$uptime = $resource[0]['uptime'];
-
+ 
 		$data = [
 			'users' => count($users),
 			'registration' => count($registration),
 			'cpu' => $cpu,
 			'uptime' => $uptime,
+			'log' => $log,
 			'history' => $history
 		];
 

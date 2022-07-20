@@ -12,9 +12,10 @@ class Users extends CI_Controller {
 			'user' => $user,
 			'group' => $group
 		];
+		
 		$this->load->view('template/main', $data);
 		$this->load->view('users/users_registration', $data);
-    }
+    } 
 
 	public function adduser(){
 		$post = $this->input->post(null, true);

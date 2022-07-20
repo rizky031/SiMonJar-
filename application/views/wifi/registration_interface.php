@@ -1,9 +1,47 @@
 <div class="content-wrapper mt-5">
-<div class="content-header">
+  <div class="content-header">
+  <div class="container-fuild">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Device Information</h3>
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                </div>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table id="" class="table table-bordered table-striped">
+                  <tbody>
+                  <?php foreach ($identity as $data) { ?>
+                  <tr><th>Identity</th><th><?= $data['name']; ?></th></tr>
+                  <?php } ?>
+                  <?php foreach ($router as $data) { ?>
+                  <tr><th>Model</th><th><?= $data['model']; ?></th></tr>
+                  <tr><th>Serial</th><th><?= $data['serial-number']; ?></th></tr>
+                  <?php } ?>
+                  <?php foreach ($resource as $data) { ?>
+                  <tr><th>Board Name</th><th><?= $data['board-name']; ?></th></tr>
+                  <tr><th>Architecture Name</th><th><?= $data['architecture-name']; ?></th></tr>
+                  <tr><th>Version</th><th><?= $data['version']; ?></th></tr>
+                  <tr><th>Free Memory</th><th><?= formatBytes($data['free-memory'], 2) ?></th></tr>
+                  <tr><th>Total Memory</th><th><?= formatBytes($data['total-memory'], 2) ?></th></tr>    
+                  <tr><th>Free HDD</th><th><?= formatBytes($data['free-hdd-space'], 2) ?></th></tr>    
+                  <tr><th>Total HDD</th><th><?= formatBytes($data['total-hdd-space'], 2) ?></th></tr>
+                  <tr><th>Build Time</th><th><?= $data['build-time']; ?></th></tr>
+                  <?php } ?>
+                  </tbody>		
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+    </div>
+
     <div class="container-fuild">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Wireless Registration</h3>
+                <h3 class="card-title">Device Registration</h3>
                 <div class="card-tools">
                   <button type="button" class="btn btn-tool" data-card-widget="collapse">
                     <i class="fas fa-minus"></i>
@@ -35,36 +73,5 @@
               <!-- /.card-body -->
             </div>
     </div>
-  </div>
-</div>
-<div class="container-fuild">
-            <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">Wireless Information</h3>
-                <div class="card-tools">
-                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                    <i class="fas fa-minus"></i>
-                  </button>
-                </div>
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body">
-                <table id="" class="table table-bordered table-striped">
-                  <tbody>
-                  <?php foreach ($wifi as $data) { ?>
-                  <tr><th>ID</th><th><?= $data['.id']; ?></th></tr>
-                  <tr><th>Name</th><th><?= $data['name']; ?></th></tr>
-                  <tr><th>Mac-Address</th><th><?= $data['mac-address']; ?></th></tr>
-                  <tr><th>Mode</th><th><?= $data['mode']; ?></th></tr>
-                  <tr><th>SSID</th><th><?= $data['ssid']; ?></th></tr>
-                  <tr><th>Band</th><th><?= $data['band']; ?></th></tr>    
-                  <tr><th>Frequency</th><th><?= $data['frequency']; ?></th></tr>    
-                  <tr><th>Security Profile</th><th><?= $data['security-profile']; ?></th></tr>
-                  <?php } ?>
-                  </tbody>		
-                </table>
-              </div>
-              <!-- /.card-body -->
-            </div>
     </div>
-
+</div>

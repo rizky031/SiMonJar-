@@ -8,6 +8,9 @@ class Registration extends CI_Controller {
 		$regist = $API->comm("/interface/wireless/registration-table/print");
 		$wifi = $API->comm("/interface/wireless/print");
 		$security = $API->comm("/interface/wireless/security-profile/print");
+		$resource = $API->comm("/system/resource/print");
+		$identity = $API->comm("/system/identity/print");
+		$router = $API->comm("/system/routerboard/print");
 
 		$regist = json_encode($regist);
 		$regist = json_decode($regist, true);
@@ -19,8 +22,13 @@ class Registration extends CI_Controller {
 			'totalregist' => count($regist),
 			'regist' => $regist,
 			'wifi' => $wifi,
-			'security' => $security
+			'security' => $security,
+			'resource' => $resource,
+			'identity' => $identity,
+			'router' => $router
 		];
+
+		
 		$this->load->view('template/main');
 		$this->load->view('wifi/registration_interface', $data);
     }

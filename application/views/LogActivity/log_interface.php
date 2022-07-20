@@ -1,4 +1,7 @@
-<div class="content-wrapper mt-5">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js"></script>
+
+  <div class="content-wrapper mt-5">
 <div class="content-header">
     <div class="container-fuild">
             <div class="card">
@@ -12,7 +15,18 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <table id="example1" class="table table-bordered table-striped">
+                <div class="row">
+                <div class="input-daterange">
+                  <div class="col">
+                  <input type="text" name="start_date" id="start_date" class="form-control" />
+                  </div>
+                </div>
+                <!-- <div class="col-md-3">
+                    <input type="button" name="search" id="search" value="Sort" class="btn btn-info" />
+                </div>-->
+                </div>
+                <br/>
+                <table id="example1" class="table table-striped">
                   <thead>
                   <tr>
                     <th>Time</th>
@@ -20,54 +34,7 @@
                     <th>Message</th>
                   </tr>
                   </thead>
-                  <tbody>
-                  <script type="module">
-                    // Import the functions you need from the SDKs you need
-                    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-app.js";
-                    import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-database.js";
-                    // TODO: Add SDKs for Firebase products that you want to use
-                    // https://firebase.google.com/docs/web/setup#available-libraries
-
-                    // Your web app's Firebase configuration
-                    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-                    const firebaseConfig = {
-                        apiKey: "AIzaSyBBpqMvdECr72EI0wDTbqtzArzQ0hJxGxg",
-                        authDomain: "monitoringjaringan-6ccec.firebaseapp.com",
-                        databaseURL: "https://monitoringjaringan-6ccec-default-rtdb.asia-southeast1.firebasedatabase.app",
-                        projectId: "monitoringjaringan-6ccec",
-                        storageBucket: "monitoringjaringan-6ccec.appspot.com",
-                        messagingSenderId: "746014492599",
-                        appId: "1:746014492599:web:f348c8a18bb0372843ca32",
-                        measurementId: "G-GJQR6TNRC1"
-                    };
-
-                    // Initialize Firebase
-                    const app = initializeApp(firebaseConfig);
-                    const db = getDatabase();
-
-                    foreach ($log as $data){
-
-                    var time = <?=$data['time'];?>
-                    var topics = <?=$data['topics'];?>
-                    var message = <?=$data['message'];?>
-
-                    function writeData(){
-                            set(ref(db, "Log/"),{
-                                Time: time.value,
-                                Topics: topics.value,
-                                Message: message.value
-                            })
-                            .then(()=>{
-                                alert("success");
-                            })
-                            .catch((error)=>{
-                                alert("unsuccess, error"+error);
-                            });
-                        }
-
-                        submit.addEventListener('click',writeData);
-                    }
-                    </script>
+                  <tbody>                    
                     <?php foreach ($log as $data) { ?>
                         <tr>
                           <th><?= $data['time']; ?></th>
@@ -76,13 +43,6 @@
                         </tr>
                     <?php } ?>
                   </tbody>
-                  <tfoot>
-                  <tr>
-                    <th>Time</th>
-                    <th>Topics</th>
-                    <th>Message</th>
-                  </tr>
-                  </tfoot>
                 </table>
               <div>
                   <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-alert">
@@ -137,3 +97,59 @@
         <!-- /.modal-dialog -->
       </div>
       <?= require ('db_alert.php'); ?>
+
+<script>
+  $(document).ready(function () {
+     var oTable = $('#example1').dataTable();
+		 // Filter to 'Webkit' and get all data for
+		 oTable.fnFilter('error');
+		 var data = oTable._('tr', {"search": "applied"});
+		 
+		 // Do something with the data
+		 alert( data.length+" error from activity" );
+  });
+</script>
+
+<script type="text/javascript" language="javascript" >
+$(document).ready(function(){
+ 
+ $('.input-daterange').datepicker({
+  todayBtn:'linked',
+  format: "yyyy-mm-dd",
+  autoclose: true
+ });
+
+ fetch_data('no');
+
+ function fetch_data(is_date_search, start_date='', end_date='')
+ {
+  var dataTable = $('#order_data').DataTable({
+   "processing" : true,
+   "serverSide" : true,
+   "order" : [],
+   "ajax" : {
+    url:"fetch.php",
+    type:"POST",
+    data:{
+     is_date_search:is_date_search, start_date:start_date, end_date:end_date
+    }
+   }
+  });
+ }
+
+ $('#search').click(function(){
+  var start_date = $('#start_date').val();
+  var end_date = $('#end_date').val();
+  if(start_date != '' && end_date !='')
+  {
+   $('#order_data').DataTable().destroy();
+   fetch_data('yes', start_date, end_date);
+  }
+  else
+  {
+   alert("Both Date is Required");
+  }
+ }); 
+ 
+});
+</script>
